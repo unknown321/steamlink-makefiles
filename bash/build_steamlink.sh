@@ -40,3 +40,4 @@ echo "Build complete!"
 echo
 echo "To copy ${PROGNAME} to the Steam Link, run:"
 echo "scp \"${BUILD}/${PROGNAME}\" root@${STEAMLINK_IP}:/home/steam/bin/"
+echo "don't forget supplied .inputrc for working HOME and END keys"

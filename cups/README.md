@@ -17,3 +17,7 @@ application/x-httpd-perl pl
 application/x-httpd-php php
 application/x-httpd-python py
 ```
+
+Get the drivers for your printer from here - https://www.openprinting.org, most likely you'll have to compile then.
+
+Or get python3 and install https://packages.debian.org/stretch/foomatic-db-compressed-ppds.

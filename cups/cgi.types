@@ -1,0 +1,5 @@
+application/x-httpd-cgi cgi
+application/x-httpd-java class
+application/x-httpd-perl pl
+application/x-httpd-php php
+application/x-httpd-python py

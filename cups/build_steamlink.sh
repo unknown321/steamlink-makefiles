@@ -33,6 +33,7 @@ make || exit 1
 "${CROSS}"strip -s ${PROGNAME}
 make BUILDROOT=${BUILD} install 
 popd
+cp cgi.types ${PROGNAME}-build/etc/${PROGNAME}/
 tar -cf ${PROGNAME}-build.tar ${PROGNAME}-build  
 #
 # All done!

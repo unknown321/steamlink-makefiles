@@ -21,3 +21,14 @@ application/x-httpd-python py
 Get the drivers for your printer from here - https://www.openprinting.org, most likely you'll have to compile then.
 
 Or get python3 and install https://packages.debian.org/stretch/foomatic-db-compressed-ppds.
+
+I cheated and scpd drivers from main system
+
+Add printer:
+
+```
+dmesg | grep -A1 -B1 "device strings"
+lsusb
+# here you find out the number of your printer by device id
+lpadmin -v usb://dev/bus/usb/001/006 -p 'printer' -P /etc/cups/ppd/HP_LaserJet_M1120_MFP.ppd
+```

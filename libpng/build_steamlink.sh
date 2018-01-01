@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 STEAMLINK_IP="192.168.10.109"
-VERSION="2.2.6"
-PROGNAME="cups"
+VERSION="1.6.34"
+PROGNAME="libpng"
 TARGET_DIR="/home/steam/opt"
-DOWNLOAD_URL="https://github.com/apple/cups/releases/download/v2.2.6/${PROGNAME}-${VERSION}-source.tar.gz"
+DOWNLOAD_URL="https://download.sourceforge.net/libpng/${PROGNAME}-${VERSION}.tar.gz"
 
 TOP=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 if [ "${MARVELL_SDK_PATH}" = "" ]; then
@@ -28,10 +28,13 @@ fi
 # Build it
 #
 pushd "${SRC}"
-"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS ; pwd || exit 1
+#export CMAKE_INCLUDE_PATH="${MARVELL_ROOTFS}/usr/include:${MARVELL_ROOTFS}/usr/local/include"
+#export CMAKE_LIBRARY_PATH="${MARVELL_ROOTFS}/usr/lib:${MARVELL_ROOTFS}/usr/local/lib"
+#cmake $STEAMLINK_CONFIGURE_OPTS . || exit 1
+"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS --with-zlib-prefix="${MARVELL_ROOTFS}/lib" || exit 1
 make || exit 1
 "${CROSS}"strip -s ${PROGNAME}
-make BUILDROOT=${BUILD} install 
+make DESTDIR=${BUILD} install 
 popd
 tar -cf ${PROGNAME}-build.tar ${PROGNAME}-build  
 #
@@ -41,11 +44,3 @@ echo "Build complete!"
 echo
 echo "To copy ${PROGNAME} to the Steam Link, run:"
 echo "scp \"${PROGNAME}-build.tar\" root@${STEAMLINK_IP}:/home/steam/opt/"
-echo "unpack archive:"
-echo "cd /home/steam/opt/ && tar -xf ${PROGNAME}-build.tar"
-echo "add paths to your .bashrc:"
-echo "PATH=$PATH:~/bin:/home/steam/opt/cups/usr/bin:/home/steam/opt/cups/usr/sbin"
-echo "export LD_LIBRARY_PATH=:/home/steam/libs:/home/steam/opt/cups/usr/lib"
-echo "run:"
-echo "cupsd -c /home/steam/opt/cups/etc/cups/cupsd.conf -s /home/steam/opt/cups/etc/cups/cups-files.conf -f"
-echo "cupsctl --remote-admin"

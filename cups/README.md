@@ -31,4 +31,13 @@ dmesg | grep -A1 -B1 "device strings"
 lsusb
 # here you find out the number of your printer by device id
 lpadmin -v usb://dev/bus/usb/001/006 -p 'printer' -P /etc/cups/ppd/HP_LaserJet_M1120_MFP.ppd
+
+
+/usr/lib/cups/backend/usb
+lpadmin -p 'HP_LaserJet_M1120_MFP' -v 'usb://HP/LaserJet%20M1120%20MFP?serial=MF326NK&interface=1' -P /etc/cups/ppd/HP_LaserJet_M1120_MFP.ppd
+cupsaccept  HP_LaserJet_M1120_MFP
+cupsenable   HP_LaserJet_M1120_MFP
+
 ```
+
+you also need ghostscript

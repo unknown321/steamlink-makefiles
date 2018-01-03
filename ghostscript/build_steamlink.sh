@@ -28,7 +28,11 @@ fi
 # Build it
 #
 pushd "${SRC}"
-"${SRC}"/autogen.sh $STEAMLINK_CONFIGURE_OPTS || exit 1
+export CFLAGSAUX=" "
+rm -rf ${SRC}/libpng
+"${SRC}"/autogen.sh $STEAMLINK_CONFIGURE_OPTS --with-arch_h=/home/unknown/steamlink/steamlink-sdk/examples/ghostscript/arch.h --without-x --with-system-libtiff --without-jbig2dec || exit 1
+#"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS  || exit 1
+sed -i 's/^CCAUX=.*/CCAUX=gcc/g' ${SRC}/Makefile
 make || exit 1
 "${CROSS}"strip -s ${PROGNAME}
 make DESTDIR=${BUILD} install 

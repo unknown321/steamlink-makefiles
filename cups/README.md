@@ -1,12 +1,13 @@
 # CUPS
 
-Ok, you want to print from your steamlink because it's small, always powered on and available on your network - a perfect machine to become a print server.
+Ok, you want to print from your steamlink because it's small, always powered on and available on your 
+network - a perfect machine to become a print server.
 
 In order to achiveve this, you will need to compile a lot of stuff, such as: 
 
   - libjpeg
   - libpng
-  - libopenjp2
+  - libopenjpeg
   - libtiff
   - libqpdf
   - lcms
@@ -86,13 +87,22 @@ Add printer via webinterface (`http://<steamlink_ip>:631`, login `root`, passwor
 If printer is not available on `Add printer` page - I am really sorry for you. You can enable debug with `cupsctl --debug-logs`, 
 restart cups and google the errors.
 
-Add printer manually, may not work (I cheated and scpd drivers in ppd format from system where that printer was already working (see `/etc/cups/ppd/` on your computer where that printer works)):
+Add printer manually, may not work (I cheated and scpd drivers in ppd format from system where that printer 
+was already working (see `/etc/cups/ppd/` on your computer where that printer works)):
 
 ```
 /usr/lib/cups/backend/usb
 lpadmin -E -p 'HP_LaserJet_M1120_MFP' -v 'usb://HP/LaserJet%20M1120%20MFP?serial=MF326NK&interface=1' -P /etc/cups/ppd/HP_LaserJet_M1120_MFP.ppd
 ```
 
+## Print
+
+```
+lp -d HP_LaserJet_M1120_MFP /usr/share/cups/data/default-testpage.pdf
+```
+
 # Notes
 
 Build scripts are ugly and I am pretty sure I left hardcoded paths in some of them. Please report issues.
+
+Network printing is not working yet - not sure what to do yet.

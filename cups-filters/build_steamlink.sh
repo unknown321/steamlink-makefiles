@@ -30,7 +30,8 @@ fi
 pushd "${SRC}"
 export PKG_CONFIG_PATH=${MARVELL_ROOTFS}/usr/lib:${MARVELL_ROOTFS}/usr/include
 export ENABLE_FOOMATIC=YES
-"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS --disable-avahi --with-cups-config=${MARVELL_ROOTFS}/usr/bin/cups-config   --prefix=${BUILD} ; pwd || exit 1
+#"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS --disable-avahi --with-cups-config=${MARVELL_ROOTFS}/usr/bin/cups-config   --prefix=${BUILD} ; pwd || exit 1
+"${SRC}"/configure $STEAMLINK_CONFIGURE_OPTS --disable-avahi --with-cups-config=${MARVELL_ROOTFS}/usr/bin/cups-config  ; pwd || exit 1
 make || exit 1
 "${CROSS}"strip -s ${PROGNAME}
 make DESTDIR=${BUILD} install 

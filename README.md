@@ -24,4 +24,4 @@ bash 4.4, debian 9.1 version
 
 # cups
 
-cups 2.2.6, see [cups/README.md](README.md) - a lot of dependencies
+cups 2.2.6, see [README.md](cups/README.md) - a lot of dependencies

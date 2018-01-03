@@ -74,7 +74,7 @@ application/x-httpd-python py
 ## Add printer
 
 Add udev rule on steamlink, idVendor and idProduct are taken from `lsusb` output - use your own instead of abcd and 0123.
-You can also get them from dmesg output - just reattach the printer.
+You can also get them from `dmesg` output - just reattach the printer.
 
 ```
 vi /etc/udev/rules.d/10-printer.rules
@@ -95,6 +95,8 @@ was already working (see `/etc/cups/ppd/` on your computer where that printer wo
 lpadmin -E -p 'HP_LaserJet_M1120_MFP' -v 'usb://HP/LaserJet%20M1120%20MFP?serial=MF326NK&interface=1' -P /etc/cups/ppd/HP_LaserJet_M1120_MFP.ppd
 ```
 
+You can also do `chmod 666 /dev/bus/usb/001/00x` and `chgrp lp /dev/bus/usb/001/00x`, where x is the number of your usb printer device (see `lsusb`)
+
 ## Print
 
 ```
@@ -106,3 +108,5 @@ lp -d HP_LaserJet_M1120_MFP /usr/share/cups/data/default-testpage.pdf
 Build scripts are ugly and I am pretty sure I left hardcoded paths in some of them. Please report issues.
 
 Network printing is not working yet - not sure what to do yet.
+
+Printing doesn't work after rebooting, `waiting for printer` - I wonder why...
